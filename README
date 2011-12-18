@@ -1,0 +1,1 @@
+This is a simple django app, aimed towards simplifying the Stripe Implementation of in django for Non PCI Compliant Sites.
