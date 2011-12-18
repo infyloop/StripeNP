@@ -1,7 +1,7 @@
 
 Stripe.setPublishableKey('pk_gSydoFvSERSnOolp6caFnpyXUDp2G');
 function stripeResponseHandler(status, response) {
-  alert(response);
+  console.log(response);
   if (response.error) {
     // re-enable the submit button
     $('.submit-button').removeAttr("disabled");
@@ -10,7 +10,7 @@ function stripeResponseHandler(status, response) {
   } else {
     var form$ = $("#payment-form");
     // token contains id, last4, and card type
-    var token = response.id;
+    var token = response['id'];
     // insert the token into the form so it gets
     // submitted to the server
     alert(token);
@@ -22,20 +22,20 @@ function stripeResponseHandler(status, response) {
 $(document).ready(function() {
   $(".submit").live("click", function(e) {
     e.preventDefault();
-    alert($('input.card-number').val());
-    var card_valid = Stripe.validateCardNumber($('input.card-number').val());
-    var expiry_valid = Stripe.validateExpiry($('input.card-expiry-month').val(), $('input.card-expiry-year').val()); // true
-    var cvc_valid = Stripe.validateCVC($('input.card-cvc').val());
+    var card_valid = Stripe.validateCardNumber($('#txt_cardno').val());
+    var expiry_valid = Stripe.validateExpiry($('#txt_expmonth').val(), $('#txt_expyear').val()); 
+    var cvc_valid = Stripe.validateCVC($('#txt_cvv').val());
 
     if (card_valid && expiry_valid && cvc_valid) {
       // disable the submit button to prevent repeated clicks
+      alert("valid");
       $('.submit-button').attr("disabled", "disabled");
       var amount = 1000; //amount you want to charge in cents
       Stripe.createToken({
-        number: $('.card-number').val(),
-        cvc: $('.card-cvc').val(),
-        exp_month: $('.card-expiry-month').val(),
-        exp_year: $('.card-expiry-year').val()
+        number: $('#txt_cardno').val(),
+        cvc: $('#txt_cvv').val(),
+        exp_month: $('#txt_expmonth').val(),
+        exp_year: $('#txt_expyear').val()
       }, amount, stripeResponseHandler);
 
       // prevent the form from submitting with the default action
