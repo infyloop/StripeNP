@@ -14,7 +14,8 @@ function stripeResponseHandler(status, response) {
     // insert the token into the form so it gets
     // submitted to the server
     alert(token);
-    form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
+    var url = "/create";
+    $.post(url, {stripe_token:token})
     // and submit
     //form$.get(0).submit();
   }

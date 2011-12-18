@@ -9,6 +9,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'sales.views.home', name='home'),
+    url(r'^create$', 'sales.views.create', name='create'),
     # url(r'^StripeNP/', include('StripeNP.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
