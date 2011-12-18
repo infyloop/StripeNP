@@ -1,7 +1,7 @@
 
 Stripe.setPublishableKey('pk_gSydoFvSERSnOolp6caFnpyXUDp2G');
 function stripeResponseHandler(status, response) {
-  alert(response.error);
+  alert(response);
   if (response.error) {
     // re-enable the submit button
     $('.submit-button').removeAttr("disabled");
@@ -24,16 +24,12 @@ $(document).ready(function() {
     e.preventDefault();
     alert($('input.card-number').val());
     var card_valid = Stripe.validateCardNumber($('input.card-number').val());
-    var expiry_valid = Stripe.validateExpiry($('input.card-expiry-month').val()); // true
+    var expiry_valid = Stripe.validateExpiry($('input.card-expiry-month').val(), $('input.card-expiry-year').val()); // true
     var cvc_valid = Stripe.validateCVC($('input.card-cvc').val());
-    console.log(card_valid);
-    console.log(expiry_valid);
-    console.log(cvc_valid);
+
     if (card_valid && expiry_valid && cvc_valid) {
-      alert("here");
       // disable the submit button to prevent repeated clicks
       $('.submit-button').attr("disabled", "disabled");
-
       var amount = 1000; //amount you want to charge in cents
       Stripe.createToken({
         number: $('.card-number').val(),
@@ -45,9 +41,7 @@ $(document).ready(function() {
       // prevent the form from submitting with the default action
       return false;
     }
-
     else {
-      alert("here");
       if (!card_valid) {
         alert("Please verify the credit card numbers.");
       }
