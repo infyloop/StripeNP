@@ -1,5 +1,6 @@
 
 Stripe.setPublishableKey('pk_gSydoFvSERSnOolp6caFnpyXUDp2G');
+
 function stripeResponseHandler(status, response) {
   console.log(response);
   if (response.error) {
@@ -15,7 +16,21 @@ function stripeResponseHandler(status, response) {
     // submitted to the server
     alert(token);
     var url = "/create";
-    $.post(url, {stripe_token:token})
+    var ccno = $('#txt_cardno').val();
+    var cclen = ccno.length;
+    var lfdig = ccno.substr(cclen-4, 4);
+    $.post(url, {
+      stripeToken:token,
+      firstName:$('#txt_firstname').val(),
+      lastName:$('#txt_lastname').val(),
+      address1:$('#txt_address1').val(),
+      address2:$('#txt_address2').val(),
+      city:$('#txt_city').val(),
+      state:$('#txt_state').val(),
+      zipCode:$('#txt_zipcode').val(),
+      country:$('#txt_country').val(),
+      lastFourDigits:lfdig
+    });
     // and submit
     //form$.get(0).submit();
   }
