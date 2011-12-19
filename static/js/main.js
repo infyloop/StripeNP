@@ -35,17 +35,19 @@ function stripeResponseHandler(status, response) {
     //form$.get(0).submit();
   }
 }
+
 $(document).ready(function() {
+                      
   $(".submit").live("click", function(e) {
-    e.preventDefault();
+                        
+      e.preventDefault();
+      $("#payment-form").validate();
     var card_valid = Stripe.validateCardNumber($('#txt_cardno').val());
     var expiry_valid = Stripe.validateExpiry($('#txt_expmonth').val(), $('#txt_expyear').val()); 
     var cvc_valid = Stripe.validateCVC($('#txt_cvv').val());
-
+                        
     if (card_valid && expiry_valid && cvc_valid) {
-      // disable the submit button to prevent repeated clicks
-      alert("valid");
-      $('.submit-button').attr("disabled", "disabled");
+        $('.submit-button').attr("disabled", "disabled");
       var amount = 1000; //amount you want to charge in cents
       Stripe.createToken({
         number: $('#txt_cardno').val(),
