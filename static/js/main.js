@@ -37,12 +37,9 @@ function stripeResponseHandler(status, response) {
 }
 
 $(document).ready(function() {
-                      
-  $(".submit").live("click", function(e) {
-                        
-      e.preventDefault();
-      $("#payment-form").validate();
-    var card_valid = Stripe.validateCardNumber($('#txt_cardno').val());
+    $("#payment-form").validate({
+     submitHandler: function(){
+                                    var card_valid = Stripe.validateCardNumber($('#txt_cardno').val());
     var expiry_valid = Stripe.validateExpiry($('#txt_expmonth').val(), $('#txt_expyear').val()); 
     var cvc_valid = Stripe.validateCVC($('#txt_cvv').val());
                         
@@ -69,7 +66,11 @@ $(document).ready(function() {
       if (!cvc_valid) {
         alert("Please verify the cvc number");
       }
-    }
-
-  });
+    }   
+                    }            });
+   
+        
+  
+                     
+  
 });

@@ -1,7 +1,7 @@
 <html>
   <head>
     <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
      <script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 <style type="text/css">
 * { font-family: Verdana; font-size: 96%; }
@@ -16,7 +16,7 @@ em { font-weight: bold; padding-right: 1em; vertical-align: top; }
   </head>
   <body>
     <div id="creditcard-lb">
-      <form  class="cmxform" method="POST" id="payment-form">
+      <form  class="cmxform" method="POST" id="payment-form" action="">
 	<p><label for="txt_firstname"><span>First Name:</span></label>
          <em>*</em> <input type="text" class="required" id="txt_firstname" name="firstname" /></p>
 	<p><label for="txt_lastname"><span>Last Name:</span></label>

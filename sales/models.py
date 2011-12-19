@@ -11,7 +11,8 @@ class CustomerDetails(models.Model):
     city = models.CharField(max_length=100, null=True, blank=True)
     state = models.CharField(max_length=100, null=True, blank=True)
     zipcode = models.CharField(max_length=100, null=True, blank=True)
+    country = models.CharField(max_length=100, null=True, blank=True)
     last_four_digits = models.CharField(max_length=10, null=True, blank=True)
-    stripe_id = models.CharField(max_length=20, null=True, blank=True)
+    stripe_response = models.CharField(max_length=20, null=True, blank=True)
     
     

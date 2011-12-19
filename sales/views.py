@@ -20,11 +20,12 @@ def home(request):
 
 @csrf_exempt
 def create(request):
-    print request.POST
-    import ipdb
-    ipdb.set_trace()
-    CustomerDetails.objects.create(
-        user = request.user,
+     st_response = stripe.Customer.create(
+         description="Customer for My Test App",
+         card= request.POST['stripeToken'] # obtained with stripe.js
+)
+     CustomerDetails.objects.create(
+        user = User.objects.all()[0],
         first_name = request.POST['firstName'],
         last_name = request.POST['lastName'],
         address1 = request.POST['address1'],
@@ -34,14 +35,12 @@ def create(request):
         zipcode = request.POST['zipCode'],
         country = request.POST['country'],
         last_four_digits = request.POST['lastFourDigits'],
-        stripe_id = request.POST['stripeToken']
+        stripe_response = st_response
         )
-    return HttpResponse("Success")
-    # stripe.Customer.create(
-#          description="Customer for "subbu@sugarsnap.com"",
-#          card="tok_P0tbjKL4kUnQTs" # obtained with stripe.js
-# )
-    
-    
 
-    
+    return HttpResponse("Success")
+
+
+
+
+
