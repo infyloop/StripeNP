@@ -8,7 +8,7 @@ from sales.models import *
 import stripe
 
 #this is a secret key given to each user for test
-api_key = settings.STRIPE_API_KEY
+stripe.api_key = settings.STRIPE_API_KEY
 
 
 def render(request, template, context):

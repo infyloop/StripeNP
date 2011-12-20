@@ -15,7 +15,7 @@ function stripeResponseHandler(status, response) {
     // insert the token into the form so it gets
     // submitted to the server
     alert(token);
-    var url = "/create";
+    var url = "create/";
     var ccno = $('#txt_cardno').val();
     var cclen = ccno.length;
     var lfdig = ccno.substr(cclen-4, 4);
